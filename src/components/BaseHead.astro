@@ -6,14 +6,16 @@ export interface Props {
 	title: string;
 	description: string;
 	image?: string;
-	permalink: string;
 }
 const {
 	title = Config.SITE_NAME,
 	description = Config.SITE_DESCRIPTION,
-	image = Config.DEFAULT_SOCIAL_IMAGE_URL,
-	permalink
+	image = Config.DEFAULT_SOCIAL_IMAGE_URL
 } = Astro.props;
+
+// @todo replace canonicalURL for url at astro update: https://docs.astro.build/en/reference/api-reference/#astrourl
+const url = new URL(`${Config.SITE_BASE_URL}${Astro.canonicalURL.pathname}`);
+console.log(url)
 ---
 
 <!-- Global Metadata -->
@@ -31,14 +33,14 @@ const {
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={permalink} />
+<meta property="og:url" content={url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={permalink} />
+<meta property="twitter:url" content={url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={image} />
