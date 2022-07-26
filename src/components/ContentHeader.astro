@@ -1,0 +1,17 @@
+---
+import { Config } from '../../constants';
+
+export interface Props {
+	title: string;
+	isInnerPage?: boolean
+}
+const {
+	title = Config.SITE_NAME,
+	isInnerPage = false
+} = Astro.props;
+---
+
+<header>
+	{isInnerPage && <div class="inner-page-title"><a href="/">{Config.SITE_NAME}</a></div>}
+	<h1>{title}</h1>
+</header>

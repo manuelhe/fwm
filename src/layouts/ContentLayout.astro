@@ -1,0 +1,27 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import BaseFooter from '../components/BaseFooter.astro';
+import ContentHeader from '../components/ContentHeader.astro';
+
+
+const { content } = Astro.props;
+const { title, description, permalink, isInnerPage = true } = content;
+---
+
+<html lang={content.lang || 'es' }>
+
+<head>
+	<BaseHead {title} {description} {permalink} />
+</head>
+
+<body>
+	<ContentHeader {title} {isInnerPage} />
+	<div class="wrapper">
+		<main>
+			<slot />
+		</main>
+		<BaseFooter />
+	</div>
+</body>
+
+</html>
